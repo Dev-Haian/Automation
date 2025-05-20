@@ -4,10 +4,6 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-	# adição da linha abaixo para execução de CRON JOB via GitHub Pipeline
-	schedule:
-    - cron: '00 14 * * Mon-Fri' # "should execute at 14:00 on every day of week from monday through friday"
-		# '0 * * * *' será executada uma vez por hora, no primeiro minuto de cada hora
 jobs:
   test:
     timeout-minutes: 60
