@@ -1,0 +1,32 @@
+{
+  "name": "playwright",
+  "version": "2.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:gen": "npx playwright codegen",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright --debug",
+    "test:report": "npx playwright show-report"
+  },
+  "keywords": ["QA", "Automation", "Teddy360", "Consig360"],
+  "author": "Matheus Oliveira <matheus.oliveira@teddydigital.io>",
+  "contributors": [
+    "Allan Messias <allan.messias@teddydigital.io>",
+    "Beatriz Amaya <beatriz.amaya@teddydigital.io>",
+    "Haian Santos <haian.santos@teddydigital.io>",
+    "Victor Ferreira <victor.ferreira@teddydigital.io>",
+    "Vinicius Cucinota <vinicius.cucinota@teddydigital.io>"
+  ],
+  "license": "ISC",
+  "description": "QA Automation for Consig360 & Teddy360",
+  "dependencies": {
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.3",
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.5.5"
+  }
+}

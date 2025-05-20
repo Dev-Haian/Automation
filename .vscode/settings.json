@@ -1,0 +1,38 @@
+{
+  "workbench.remoteIndicator.showExtensionRecommendations": true,
+
+  /* BiomeJS */
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+
+  /* Playwright */
+  "playwright.reuseBrowser": true,
+
+  /* TODO Highlight */
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.keywords": [
+    // "DEBUG:",
+    // "REVIEW:",
+    {
+      "text": "DONE:",
+      "color": "white",
+      "backgroundColor": "#090",
+      "isWholeLine": false
+    },
+    {
+      "text": "INFO:",
+      "color": "white",
+      "backgroundColor": "#66f",
+      "isWholeLine": false
+    },
+    {
+      "text": "TODO:",
+      "isWholeLine": false
+    },
+    {
+      "text": "FIXME:",
+      "isWholeLine": false
+    }
+  ]
+}
