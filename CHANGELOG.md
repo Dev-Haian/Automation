@@ -4,6 +4,11 @@ Todas as mudanças notáveis para este projeto serão documentadas neste arquivo
 
 O formato deste documento está baseado em: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.1.0] - 2025-MAI-21
+
+### ADDED
+- Múltiplas implementações de documentação, CI e adição de comentários;
+
 ## [2.0.0] - 2025-MAI-14
 
 ### ADDED
