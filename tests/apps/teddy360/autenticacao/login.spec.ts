@@ -21,7 +21,7 @@ test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
     // Acessar Teddy360
     await page.goto(`${dados.plataforma.url}/#/login`);
     // preencher credenciais de login
-    await page.getByPlaceholder("Digite seu E-email").fill(dados.usuario.email);
+    await page.getByPlaceholder("Digite seu E-mail").fill(dados.usuario.email);
     await page.getByPlaceholder("Digite sua Senha").fill(dados.usuario.senha);
 
     // clicar no notão de login "Acessar"
