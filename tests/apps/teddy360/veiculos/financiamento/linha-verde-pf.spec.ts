@@ -92,7 +92,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     // Relação dos principais clientes do Proponente
     await page.getByPlaceholder("Descreva o nome dos").pressSequentially(dados.input.relacaoDosPrincipaisClientes);
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip(`Validar: Geração da proposta de ${sut}`, async () => {
     const button = page.getByRole("button", { name: dados.botoes.gerarNovaProposta });
     await button.click();

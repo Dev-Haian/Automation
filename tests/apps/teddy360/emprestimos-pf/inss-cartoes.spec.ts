@@ -96,7 +96,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
       .getByRole("textbox")
       .fill(dados.input.observacao);
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: gerar nova proposta", async () => {
     const button = page.getByRole("button", { name: dados.botoes.gerarNovaProposta });
     button.click();

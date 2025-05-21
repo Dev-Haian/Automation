@@ -223,7 +223,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     // Após preencher o formulário, o usuário deve clicar em "Continuar"
     await page.getByRole("button", { name: "Continuar" }).click();
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: (5° Etapa) finalizar a jornada e gerar proposta", async () => {
     await page.waitForTimeout(1000 * 1.5);
 

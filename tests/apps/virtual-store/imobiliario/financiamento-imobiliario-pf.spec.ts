@@ -200,12 +200,12 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na loja`, 
     await page.waitForTimeout(ONE_SECOND * 65);
     await page.getByRole("button", { name: "Continuar" }).click();
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: 4° form (Última etapa)", async () => {
     await page.waitForTimeout(ONE_SECOND * 20);
     await page.getByRole("button", { name: "Gerar e acompanhar proposta" }).click();
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: modal de sucesso ao criar proposta", async () => {
     expect(page.getByText("Sua solicitação foi enviada ao Business Banker!").isVisible()).toBeTruthy();
     expect(page.getByRole("button", { name: "entendi!" }).isVisible()).toBeTruthy();

@@ -121,7 +121,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   await test.step("Validar: (2° Etapa) preencher os dados extras do cliente", async () => {
     //
   });
-
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: (3° Etapa) finalizar a jornada e gerar proposta", async () => {
     await page.waitForTimeout(1000 * 5);
     await page.getByRole("button", { name: "Finalizar" }).click();
