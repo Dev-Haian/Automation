@@ -8,10 +8,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: "html",
   use: {
-    headless: false,
-    launchOptions: {
-      slowMo: 300,
-    },
+    //headless: true,
+    // launchOptions: {
+    //   slowMo: 300,
+    // },
     video: "on",
     screenshot: "only-on-failure",
     trace: "on-first-retry",
@@ -27,7 +27,12 @@ export default defineConfig({
           width: 1920,
           height: 1080,
         },
-        // deviceScaleFactor: 0.5,
+        launchOptions: {
+          ignoreDefaultArgs: ["--headless", "--headless=old"],
+          args: ["--headless=new"],
+          slowMo: 300,
+        },
+        headless: false,
       },
     },
   ],
