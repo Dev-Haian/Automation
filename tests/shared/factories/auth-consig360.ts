@@ -13,7 +13,7 @@ class AuthConsig360 {
    *
    * @example
    * ```typescript
-   * await AuthConsig360Consig360().makeUserLogin({
+   * await AuthConsig360().makeUserLogin({
    * 	page: Page, // informar page do Playwright
    * 	userEmail: "seu.email@email.com",
    * 	userPassword: "sua senha",
@@ -43,7 +43,7 @@ class AuthConsig360 {
    *
    * @example
    * ```typescript
-   * await AuthConsig360Consig360().makeUserLogout({
+   * await AuthConsig360().makeUserLogout({
    * 	page: Page // informar page do Playwright
    * 	url: "url-da-aplicação.com",
    * });

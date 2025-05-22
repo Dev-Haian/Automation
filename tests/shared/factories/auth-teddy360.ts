@@ -12,7 +12,7 @@ class AuthTeddy360 {
    *
    * @example
    * ```typescript
-   * await AuthTeddy360Teddy360().makeUserLogin({
+   * await AuthTeddy360().makeUserLogin({
    * 	page: Page, // informar page do Playwright
    * 	userEmail: "seu.email@email.com",
    * 	userPassword: "sua senha",
@@ -35,7 +35,7 @@ class AuthTeddy360 {
    *
    * @example
    * ```typescript
-   * await AuthTeddy360Teddy360().makeUserLogout({
+   * await AuthTeddy360().makeUserLogout({
    * 	page: Page // informar page do Playwright
    * 	url: "url-da-aplicação.com",
    * });
