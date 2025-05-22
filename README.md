@@ -25,4 +25,39 @@
 | Tablet 	| (768x1024)		|	100%				|
 | Mobile 	| (390x844)			|	100%				|
 
+<h3>GitHub Actions</h3>
+
+Create this file inside this: `.github/workflows/playwright.yml`.
+
+```YML
+name: Playwright Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Install only Chromium with dependencies
+      run: npx playwright install --with-deps chromium
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+
+```
+
 <p align="center">Feito c/ 🧡 pelos QA's</p>
