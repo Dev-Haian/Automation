@@ -1,14 +1,12 @@
 import test, { expect } from "@playwright/test";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
-import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
 const sut = "(Loja) Financiamento Imobiliário";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na loja`, async ({ page }) => {
-  getCurrentAutomation(sut);
   const dados = {
     loja: {
       url: setup.apps.virtualStore.url,
