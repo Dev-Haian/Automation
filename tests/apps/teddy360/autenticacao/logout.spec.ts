@@ -3,12 +3,15 @@ import { AuthTeddy360 } from "../../../shared/factories/auth-teddy360";
 import { checkExistentsProposals } from "../../../shared/utils/check-exitents-proposals";
 import { ONE_MINUTE } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
+import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
 const sut = "(Teddy360) Logout";
 
 test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.teddy360.url,

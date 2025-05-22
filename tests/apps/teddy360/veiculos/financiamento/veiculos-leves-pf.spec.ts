@@ -5,6 +5,7 @@ import { checkExistentsProposals } from "../../../../shared/utils/check-exitents
 import { Email } from "../../../../shared/utils/send-mail";
 import { Screenshot } from "../../../../shared/utils/screenshot";
 import { setup } from "../../../../shared/setup";
+import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
 
 // FIXME: A jornada de veículos está em refatoração (no back e front)!
 test.setTimeout(TRHEE_MINUTES);
@@ -14,6 +15,8 @@ const api = {
 const sut = "(Teddy360) Financiamento de Veículos Leves (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.teddy360.url,

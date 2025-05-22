@@ -6,6 +6,7 @@ import { setup } from "../../../shared/setup";
 import { Email } from "../../../shared/utils/send-mail";
 import { Screenshot } from "../../../shared/utils/screenshot";
 import { BancoDeDados } from "../../../shared/fixtures/database/db";
+import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // TODO: Automação a fazer!
 test.setTimeout(TRHEE_MINUTES);
@@ -15,6 +16,8 @@ const api = {
 const sut = "(Teddy360) Consórcio - Imóveis (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.teddy360.url,

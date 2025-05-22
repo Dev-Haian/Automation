@@ -5,6 +5,7 @@ import { Email } from "../../../shared/utils/send-mail";
 import { Screenshot } from "../../../shared/utils/screenshot";
 import { TRHEE_MINUTES } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
+import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
@@ -15,6 +16,8 @@ const api = {
 const sut = "(Teddy360) INSS Cartões (Empréstimos PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.teddy360.url,

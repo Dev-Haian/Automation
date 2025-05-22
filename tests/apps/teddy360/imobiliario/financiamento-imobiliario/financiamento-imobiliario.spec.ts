@@ -3,12 +3,15 @@ import { FIVE_MINUTES } from "../../../../shared/test-timeout";
 import { setup } from "../../../../shared/setup";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
 import { checkExistentsProposals } from "../../../../shared/utils/check-exitents-proposals";
+import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada! (Beatriz)
 test.setTimeout(FIVE_MINUTES);
 const sut = "(Teddy360) Financiamento de imobiliário (PF)";
 
 test(`Fluxo Completo de Proposta de ${sut} na Plataforma`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.teddy360.url,

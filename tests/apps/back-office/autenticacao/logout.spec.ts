@@ -2,12 +2,15 @@ import { test, expect } from "@playwright/test";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../shared/test-timeout";
 import { AuthBackOffice } from "../../../shared/factories/auth-back-office";
 import { setup } from "../../../shared/setup";
+import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
 const sut = "(Back-Office) Logout";
 
 test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.backOffice.url,

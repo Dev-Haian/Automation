@@ -1,12 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { ONE_MINUTE, ONE_SECOND } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
+import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
 const sut = "(Back-Office) Login";
 
 test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
   const dados = {
     plataforma: {
       url: setup.apps.backOffice.url,
