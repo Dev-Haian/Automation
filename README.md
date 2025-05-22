@@ -27,7 +27,7 @@
 
 <h3>GitHub Actions</h3>
 
-Create this file inside this: `.github/workflows/playwright.yml`.
+Crie este arquivo neste caminho: `.github/workflows/playwright.yml`.
 
 ```YML
 name: Playwright Tests
@@ -59,5 +59,7 @@ jobs:
         retention-days: 30
 
 ```
+
+**NOTA**: O motivo deste repo estar sem as actions é temporário, mas envolve custos.
 
 <p align="center">Feito c/ 🧡 pelos QA's</p>
