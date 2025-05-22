@@ -6,7 +6,7 @@ import { setup } from "../../../shared/setup";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
-const sut = "Logout";
+const sut = "(Teddy360) Logout";
 
 test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
   const dados = {

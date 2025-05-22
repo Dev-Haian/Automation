@@ -11,7 +11,7 @@ test.setTimeout(TRHEE_MINUTES);
 const api = {
   gerarNovaProposta: "https://backend-prod.teddy360.com.br/simulation-teddy/vehcicle/create-proposal",
 };
-const sut = "Financiamento de Veículos Leves (PF)";
+const sut = "(Teddy360) Financiamento de Veículos Leves (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   const dados = {

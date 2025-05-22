@@ -4,7 +4,7 @@ import { setup } from "../../../shared/setup";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
-const sut = "Login";
+const sut = "(Consig360) Login";
 
 test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
   const dados = {

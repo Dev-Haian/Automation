@@ -5,7 +5,7 @@ import { setup } from "../../../shared/setup";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
-const sut = "Logout";
+const sut = "(Back-Office) Logout";
 
 test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
   const dados = {

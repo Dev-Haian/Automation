@@ -5,8 +5,6 @@ import { Email } from "../../../shared/utils/send-mail";
 import { Screenshot } from "../../../shared/utils/screenshot";
 import { TRHEE_MINUTES } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
-import { BancoDeDados } from "../../../shared/fixtures/database/db";
-import { CRM } from "../../../shared/fixtures/bitrix-24/bitrix-24";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
@@ -14,7 +12,7 @@ const ambiente = "prod";
 const api = {
   gerarNovaProposta: `https://backend-${ambiente}.teddy360.com.br/clients/requests`,
 };
-const sut = "INSS Cartões (Empréstimos PF)";
+const sut = "(Teddy360) INSS Cartões (Empréstimos PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   const dados = {

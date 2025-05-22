@@ -11,7 +11,7 @@ test.setTimeout(TRHEE_MINUTES);
 const api = {
   gerarNovaProposta: "https://backend-prod.teddy360.com.br/clients/requests",
 };
-const sut = "Financiamento Linha Verde (PF)";
+const sut = "(Teddy360) Financiamento Linha Verde (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   const dados = {

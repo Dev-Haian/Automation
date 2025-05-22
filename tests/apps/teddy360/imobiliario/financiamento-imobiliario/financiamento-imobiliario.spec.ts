@@ -6,7 +6,7 @@ import { checkExistentsProposals } from "../../../../shared/utils/check-exitents
 
 // DONE: Automação finalizada! (Beatriz)
 test.setTimeout(FIVE_MINUTES);
-const sut = "Financiamento de imobiliário (PF)";
+const sut = "(Teddy360) Financiamento de imobiliário (PF)";
 
 test(`Fluxo Completo de Proposta de ${sut} na Plataforma`, async ({ page }) => {
   const dados = {

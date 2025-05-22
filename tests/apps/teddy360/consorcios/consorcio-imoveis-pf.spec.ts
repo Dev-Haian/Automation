@@ -12,7 +12,7 @@ test.setTimeout(TRHEE_MINUTES);
 const api = {
   enviarProposta: "https://backend-consorcio-prod.teddy360.com.br/proposals/send-proposal",
 };
-const sut = "Consórcio - Imóveis (PF)";
+const sut = "(Teddy360) Consórcio - Imóveis (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   const dados = {

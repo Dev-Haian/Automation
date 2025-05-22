@@ -1,9 +1,3 @@
-import fs from "node:fs";
-
-const { version } = JSON.parse(fs.readFileSync("package.json", "utf-8"));
-
-console.log(`Versão: ${version}`);
-
 const automationEmail = "alerta_qualidade@teddydigital.io";
 const automationPassword = "Qa25@T&ddy";
 

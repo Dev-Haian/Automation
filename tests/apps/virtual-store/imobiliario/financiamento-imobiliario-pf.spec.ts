@@ -4,7 +4,7 @@ import { setup } from "../../../shared/setup";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
-const sut = "Financiamento Imobiliário";
+const sut = "(Loja) Financiamento Imobiliário";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na loja`, async ({ page }) => {
   const dados = {

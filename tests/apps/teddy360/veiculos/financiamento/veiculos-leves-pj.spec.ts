@@ -6,7 +6,7 @@ import { setup } from "../../../../shared/setup";
 
 // FIXME: A jornada de veículos está em refatoração (no back e front)!
 test.setTimeout(TRHEE_MINUTES);
-const sut = "Financiamento de Veículos Leves (PJ)";
+const sut = "(Teddy360) Financiamento de Veículos Leves (PJ)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   const dados = {
