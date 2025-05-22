@@ -9,5 +9,5 @@ import fs from "node:fs";
 export function getCurrentAutomation(sut: string) {
   const { version } = JSON.parse(fs.readFileSync("package.json", "utf-8"));
 
-  console.log(`Automação: ${sut} -> Versão: ${version}`);
+  console.log(`Automação: ${sut} -> Versão: ${version}\n`);
 }
