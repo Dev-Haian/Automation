@@ -12,6 +12,7 @@
 	- shared/
 		- factories/
 		- fixtures/
+		- logs/
 		- types/
 		- utils/
 
