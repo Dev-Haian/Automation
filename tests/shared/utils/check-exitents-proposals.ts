@@ -14,11 +14,13 @@ import { ONE_SECOND } from "../test-timeout";
 export async function checkExistentsProposals(page: Page) {
   await page.waitForTimeout(ONE_SECOND * 7);
 
-  if (await page.locator("//html/body/ampl-survey/survey/div[2]/i").isVisible()) {
-    page.locator("//html/body/ampl-survey/survey/div[2]/i").click();
+  const closeSurveyModal = page.locator("//html/body/ampl-survey/survey/div[2]/i");
+  if (await closeSurveyModal.isVisible()) {
+    await closeSurveyModal.click();
   }
 
-  if (await page.getByRole("button", { name: "Descartar proposta" }).isVisible()) {
-    page.getByRole("button", { name: "Descartar proposta" }).click();
+  const disardProposalButton = page.getByRole("button", { name: "Descartar proposta" });
+  if (await disardProposalButton.isVisible()) {
+    await disardProposalButton.click();
   }
 }
