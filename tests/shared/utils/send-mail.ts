@@ -100,7 +100,7 @@ class Email {
       // Após anexar o arquivo no e-email, deletar deste repositório
       await new Screenshot().deleteAttachmentFromPath(pathToAttachment);
     }
-    // await page.getByLabel("Send", { exact: true }).click();
+    await page.getByLabel("Send", { exact: true }).click();
   }
 
   /**
