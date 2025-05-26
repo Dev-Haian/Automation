@@ -25,7 +25,7 @@ type AutomationContext = {
   api: Response;
 } & Optional<MailProps, "body">;
 
-function formatMailBody(body: ErrorContentBody): string {
+export function formatMailBody(body: ErrorContentBody): string {
   return `
 		Olá, prezados(as).
 
@@ -69,14 +69,14 @@ class Email {
 
     await page.getByRole("button", { name: "Yes" }).click();
 
-    await page.getByRole("button", { name: "New email" }).nth(1).click();
+    await page.getByRole("button", { name: "New mail" }).nth(1).click();
 
     for (const recipient of recipients) {
-      const toField = page.getByLabel("To", { exact: true });
+      const aoCampo = page.getByLabel("To", { exact: true });
 
-      await toField.fill(recipient);
+      await aoCampo.fill(recipient);
       await page.waitForTimeout(750);
-      await toField.waitFor();
+      await aoCampo.waitFor();
       await page.keyboard.press("Enter");
     }
 
@@ -100,6 +100,7 @@ class Email {
       // Após anexar o arquivo no e-email, deletar deste repositório
       await new Screenshot().deleteAttachmentFromPath(pathToAttachment);
     }
+
     await page.getByLabel("Send", { exact: true }).click();
   }
 

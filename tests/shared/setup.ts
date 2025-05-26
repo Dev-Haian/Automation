@@ -49,7 +49,7 @@ const setup = {
  * ```
  */
 const outlook = {
-  url: "https://outlook.office.com/email/",
+  url: "https://outlook.office.com/mail/",
   email: automationEmail,
   password: automationPassword,
 };
