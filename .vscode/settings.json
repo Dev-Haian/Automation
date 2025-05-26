@@ -1,4 +1,5 @@
 {
+  /* Recomendar extensões */
   "workbench.remoteIndicator.showExtensionRecommendations": true,
 
   /* BiomeJS */
