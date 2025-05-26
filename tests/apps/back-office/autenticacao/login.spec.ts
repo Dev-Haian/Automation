@@ -11,7 +11,7 @@ test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
   getCurrentAutomation(sut);
 
   const dados = {
-    plataforma: {
+    backOffice: {
       url: setup.apps.backOffice.url,
     },
     usuario: {
@@ -21,8 +21,8 @@ test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
   };
 
   await test.step("Usuário deve conseguir se autenticar com as credenciais corretas", async () => {
-    // Acessar Consig360
-    await page.goto(`${dados.plataforma.url}/auth/sign-in`);
+    // Acessar BackOffice
+    await page.goto(`${dados.backOffice.url}/auth/sign-in`);
 
     // preencher credenciais de login
     await page.getByPlaceholder("Digite o seu e-mail:").fill(dados.usuario.email);
@@ -30,9 +30,42 @@ test(`Feat: [${sut}] - Validar fluxo de autenticação`, async ({ page }) => {
 
     // clicar no notão de login "Acessar"
     await page.getByRole("button", { name: "Acessar" }).click();
-    await page.waitForURL(`${dados.plataforma.url}/user/marketing/white-label`, { timeout: ONE_SECOND * 3 });
+    await page.waitForURL(`${dados.backOffice.url}/user/marketing/white-label`, { timeout: ONE_SECOND * 3 });
 
-    // Asserção - usuário deve conseguir acessar a plataforma
-    expect(page.url()).toEqual(`${dados.plataforma.url}/user/marketing/white-label`);
+    // Asserção - usuário deve conseguir acessar o backOffice
+    expect(page.url()).toEqual(`${dados.backOffice.url}/user/marketing/white-label`);
+  });
+});
+
+test(`Feat: [${sut}] - Validar fluxo de autenticação com credenciais erradas`, async ({ page }) => {
+  getCurrentAutomation(sut);
+
+  const dados = {
+    backOffice: {
+      url: setup.apps.backOffice.url,
+    },
+    usuario: {
+      email: setup.user.email,
+      senha: "Senha errada",
+    },
+  };
+
+  await test.step("Usuário deve conseguir se autenticar com as credenciais corretas", async () => {
+    // Acessar BackOffice
+    await page.goto(`${dados.backOffice.url}/auth/sign-in`);
+
+    // preencher credenciais de login
+    await page.getByPlaceholder("Digite o seu e-mail:").fill(dados.usuario.email);
+    await page.getByPlaceholder("Digite a sua senha:").fill(dados.usuario.senha);
+
+    // clicar no notão de login "Acessar"
+    await page.getByRole("button", { name: "Acessar" }).click();
+
+    await page.getByText("Usuário e/ou senha incorretos.", { exact: true }).isVisible();
+
+    // Asserção - mensagem de erro deve estar visível, pois
+    // usuário não deve conseguir acessar o backOffice com credenciais erradas
+    const mensagemDeErro = page.getByText("Usuário e/ou senha incorretos.", { exact: true });
+    expect(await mensagemDeErro.isVisible()).toBeTruthy();
   });
 });
