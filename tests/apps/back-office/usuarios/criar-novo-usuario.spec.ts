@@ -36,6 +36,7 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
       adicionar: "Adicionar",
     },
   };
+
   await test.step("Validar: Realizar login", async () => {
     await new AuthBackOffice().makeUserLogin({
       page,
@@ -44,13 +45,15 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
       userPassword: "Teddy@123",
     });
   });
+
   await test.step("Validar: Acessar módulo 'Usuários'", async () => {
-    //
+    // Acessar tab 'Usuários'
     await page.getByText("Usuários").first().click();
   });
   await test.step("Validar: Acessar formulário para criar novo usuário", async () => {
     await page.getByRole("button", { name: dados.botoes.criarNovoUsuario }).click();
   });
+
   await test.step("Validar: Preencher formulário (drawer lateral esquerda)", async () => {
     // Nome completo:
     await page.getByPlaceholder("Digite o nome completo").fill(dados.input.nomeCompleto);
@@ -66,6 +69,7 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
     // ID do usuário no CRM (opcional)
     await page.getByPlaceholder("Digite o ID do usuário no CRM").fill(dados.input.idDoUsuarioNoCRM);
   });
+
   await test.step("Validar: Criar novo usuário", async () => {
     const btnAdicionar = page.getByRole("button", { name: dados.botoes.adicionar });
     await btnAdicionar.click();
@@ -75,7 +79,7 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
       page,
       sut,
       api: await page.waitForResponse(api.adicionarNovoUsuario),
-      subject: `Erro ao gerar proposta - ${sut}`,
+      subject: `Erro - ${sut}`,
       pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
       expectedStatusCode: 201,
     });

@@ -12,8 +12,8 @@ import { ONE_SECOND } from "../test-timeout";
 export async function checkExistentNewsModal(page: Page) {
   await page.waitForTimeout(ONE_SECOND * 7);
 
-  const xButton = page.locator("lib-modal-header").getByRole("button", { name: "" });
-  if (await xButton.isVisible()) {
-    await xButton.click();
+  const btnX = page.locator("lib-modal-header").getByRole("button", { name: "" });
+  if (await btnX.isVisible()) {
+    await btnX.click();
   }
 }
