@@ -41,8 +41,8 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
     await new AuthBackOffice().makeUserLogin({
       page,
       url: dados.backOffice.url,
-      userEmail: "matheus.oliveira@teddydigital.io",
-      userPassword: "Teddy@123",
+      userEmail: dados.usuario.email,
+      userPassword: dados.usuario.senha,
     });
   });
 
