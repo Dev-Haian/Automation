@@ -1,14 +1,12 @@
 import { Client } from "pg";
 import { test as pw } from "@playwright/test";
 
-const allan = process.env.ALLAN_URL;
-
 class DB {
   private DBConfig = {
     user: "db_user",
-    host: allan,
-    database: "local_db",
+    host: "0.0.0.0",
     password: "password",
+    database: "local_db",
     port: 5432,
     idleTimeoutMillis: 30000,
     conectionTimeoutMillis: 2000,

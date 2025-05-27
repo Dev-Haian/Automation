@@ -130,8 +130,8 @@ class Email {
     sut,
     pathToAttachment,
   }: AutomationContext) {
-    const statusCode = api.status() !== expectedStatusCode || !api.status();
-    const errorMessage = (await page.getByText(String(errorVisibleMessage)).isVisible()) || !errorVisibleMessage;
+    const statusCode = api.status() !== expectedStatusCode;
+    const errorMessage = await page.getByText(String(errorVisibleMessage)).isVisible();
 
     const data: MailProps = {
       page,
