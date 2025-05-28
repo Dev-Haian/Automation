@@ -8,7 +8,7 @@ import { getCurrentAutomation } from "../../../shared/logs/get-current-automatio
 test.setTimeout(TRHEE_MINUTES);
 const sut = "(Back-Office) Logout";
 
-test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
+test(`Feat: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
   getCurrentAutomation(sut);
 
   const dados = {
@@ -36,8 +36,9 @@ test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ 
     await page.getByRole("button", { name: iconeDeConfig }).nth(1).click();
     await page.getByRole("button", { name: " Sair" }).click();
 
-    await page.waitForURL(`${dados.plataforma.url}/`, { timeout: ONE_SECOND * 3 });
+    const urlDeLogin = `${dados.plataforma.url}/auth/sign-in`;
+    await page.waitForURL(urlDeLogin, { timeout: ONE_SECOND * 2 });
 
-    expect(page.url()).toEqual(`${dados.plataforma.url}/auth/sign-in`);
+    expect(page.url()).toEqual(urlDeLogin);
   });
 });

@@ -9,7 +9,7 @@ import { checkInitialModals } from "../../../shared/utils/check-initial-modals";
 test.setTimeout(ONE_MINUTE);
 const sut = "(Teddy360) Logout";
 
-test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
+test(`Feat: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
   getCurrentAutomation(sut);
 
   const dados = {

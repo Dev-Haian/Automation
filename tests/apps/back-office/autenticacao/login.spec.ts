@@ -61,10 +61,9 @@ test(`Feat: [${sut}] - Validar fluxo de autenticação com credenciais erradas`,
     // clicar no notão de login "Acessar"
     await page.getByRole("button", { name: "Acessar" }).click();
 
-    await page.getByText("Usuário e/ou senha incorretos.", { exact: true }).isVisible();
-
     // Asserção - mensagem de erro deve estar visível, pois
     // usuário não deve conseguir acessar o backOffice com credenciais erradas
+    await page.waitForTimeout(ONE_SECOND * 2);
     const mensagemDeErro = page.getByText("Usuário e/ou senha incorretos.", { exact: true });
     expect(await mensagemDeErro.isVisible()).toBeTruthy();
   });

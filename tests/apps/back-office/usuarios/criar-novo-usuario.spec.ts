@@ -1,18 +1,19 @@
-import test from "@playwright/test";
+import test, { expect } from "@playwright/test";
 import { setup } from "../../../shared/setup";
 import { AuthBackOffice } from "../../../shared/factories/auth-back-office";
 import { ONE_MINUTE, ONE_SECOND } from "../../../shared/test-timeout";
 import { Email } from "../../../shared/utils/send-mail";
 import { Screenshot } from "../../../shared/utils/screenshot";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
+import { getBackOfficeUserByName } from "../../../shared/factories/back-office/get-back-office-user-by-name";
 
 test.setTimeout(ONE_MINUTE * 2);
 const api = {
-  adicionarNovoUsuario: "https://qwwoufnkek.execute-api.us-east-1.amazonaws.com/marketing/users",
+  adicionarNovoUsuario: "https://qwwoufnkek.execute-api.us-east-1.amazonaws.com/auth/users",
 };
 const sut = "(Back-Office) Criar novo usuário";
 
-test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, async ({ page }) => {
+test(`Feat: [${sut}] Validar o fluxo completo`, async ({ page }) => {
   getCurrentAutomation(sut);
 
   const dados = {
@@ -24,16 +25,21 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
       senha: setup.user.password,
     },
     input: {
-      nomeCompleto: "QA Automation",
-      email: "alerta_qualidade@teddydigital.io",
-      senha: "Qa25@T&ddy",
-      confirmeASenha: "Qa25@T&ddy",
+      nomeCompleto: "Usuário de Nome Único Para Ser Excluído Mais Tarde",
+      email: "userdeemailunicoaexcluir@testing.com",
+      senha: "Senha@123",
+      confirmeASenha: "Senha@123",
       modulos: "Todos",
       idDoUsuarioNoCRM: "",
     },
     botoes: {
       criarNovoUsuario: "Criar novo usuário",
       adicionar: "Adicionar",
+    },
+    mensagem: {
+      nenhumUsuarioFoiEncontrado: "Nenhum usuário foi encontrado.",
+      sucessoAoDeletarUsuario: "Sucesso ao deletar usuário",
+      sucessoAoCriarUsuario: "Sucesso ao criar usuário",
     },
   };
 
@@ -83,5 +89,39 @@ test(`Feat: [${sut}] Validar o fluxo completo de criação de novo usuário`, as
       pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
       expectedStatusCode: 201,
     });
+
+    expect(await page.getByText(dados.mensagem.sucessoAoCriarUsuario, { exact: true }).isVisible()).toBeTruthy();
+  });
+
+  await test.step("Validar: excluir usuário criado", async () => {
+    await page.goto(`${dados.backOffice.url}/user/users`);
+
+    const usuarioPesquisado = await getBackOfficeUserByName({ page, username: dados.input.nomeCompleto });
+
+    await page.waitForTimeout(ONE_SECOND);
+
+    expect(usuarioPesquisado).toBeTruthy();
+
+    const mensagem = page.getByText(dados.mensagem.nenhumUsuarioFoiEncontrado);
+    expect(await mensagem.isVisible()).toBeFalsy();
+
+    await page.getByRole("table").locator("button").nth(1).click();
+    await page.getByRole("button", { name: " Deletar" }).click();
+    // Modal de confirmação
+    await page.getByRole("button", { name: "Excluir usuário" }).click();
+    await page.waitForTimeout(ONE_SECOND * 1.2);
+
+    expect(await page.getByText(dados.mensagem.sucessoAoDeletarUsuario, { exact: true }).isVisible()).toBeTruthy();
+  });
+
+  await test.step("Validar: Usuário excluído não é mais encontrado", async () => {
+    const usuarioPesquisado = await getBackOfficeUserByName({ page, username: dados.input.nomeCompleto });
+
+    await page.waitForTimeout(ONE_SECOND);
+
+    expect(usuarioPesquisado).toBeFalsy();
+
+    const mensagem = page.getByText(dados.mensagem.nenhumUsuarioFoiEncontrado);
+    expect(await mensagem.isVisible()).toBeTruthy();
   });
 });
