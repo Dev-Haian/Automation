@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 import { FIVE_MINUTES } from "../../../../shared/test-timeout";
 import { setup } from "../../../../shared/setup";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
-import { checkExistentsProposals } from "../../../../shared/utils/check-exitents-proposals";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
+import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
 // DONE: Automação finalizada! (Beatriz)
 test.setTimeout(FIVE_MINUTES);
@@ -34,8 +34,8 @@ test(`Fluxo Completo de Proposta de ${sut} na Plataforma`, async ({ page }) => {
     });
   });
 
-  await test.step("Validar: Checar propostas existentes", async () => {
-    await checkExistentsProposals(page);
+  await test.step("Validar: Checar modais iniciais", async () => {
+    await checkInitialModals(page);
   });
 
   await test.step("Validar: acessar módulo clientes", async () => {

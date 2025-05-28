@@ -1,11 +1,11 @@
 import test, { expect } from "@playwright/test";
-import { checkExistentsProposals } from "../../../../shared/utils/check-exitents-proposals";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../../shared/test-timeout";
 import { setup } from "../../../../shared/setup";
 import { Email } from "../../../../shared/utils/send-mail";
 import { Screenshot } from "../../../../shared/utils/screenshot";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
+import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
 // DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
@@ -49,8 +49,8 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     });
   });
 
-  await test.step("Validar: Checar propostas existentes", async () => {
-    await checkExistentsProposals(page);
+  await test.step("Validar: Checar modais iniciais", async () => {
+    await checkInitialModals(page);
   });
 
   await test.step("Validar: acessar módulo Clientes", async () => {

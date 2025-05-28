@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { AuthTeddy360 } from "../../../shared/factories/auth-teddy360";
-import { checkExistentsProposals } from "../../../shared/utils/check-exitents-proposals";
 import { ONE_MINUTE } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
+import { checkInitialModals } from "../../../shared/utils/check-initial-modals";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
@@ -21,7 +21,7 @@ test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ 
       senha: setup.user.password,
     },
   };
-  await test.step("Usuário deve estar previamente autenticado", async () => {
+  await test.step("Validar: Usuário deve estar previamente autenticado", async () => {
     await new AuthTeddy360().makeUserLogin({
       page,
       url: dados.plataforma.url,
@@ -30,11 +30,11 @@ test(`Feature: [${sut}] Validação fluxo de encerramento de sessão`, async ({ 
     });
   });
 
-  await test.step("Usuário deve conseguir verificar as propostas existentes", async () => {
-    await checkExistentsProposals(page);
+  await test.step("Validar: Checar modais iniciais", async () => {
+    await checkInitialModals(page);
   });
 
-  await test.step("Usuário deve conseguir encerrar sessão", async () => {
+  await test.step("Validar: Usuário deve conseguir encerrar sessão", async () => {
     await page.goto(`${dados.plataforma.url}/#/dashboard`);
     await page.getByText("Bem-vindo").waitFor();
 
