@@ -1,6 +1,6 @@
 {
-  "name": "playwright",
-  "version": "2.1.0",
+  "name": "qa-automation",
+  "version": "2.1.2",
   "main": "index.js",
   "type": "module",
   "scripts": {

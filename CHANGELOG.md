@@ -4,6 +4,16 @@ Todas as mudanças notáveis para este projeto serão documentadas neste arquivo
 
 O formato deste documento está baseado em: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.1.2] - 2025-MAI-28
+
+### CHANGED
+- Remoção da função que verificava as modais survey e propostas existentes;
+
+### ADDED
+- Função que verifica as modais iniciais e as fecha caso estejam visiveis: survey, notícias e propostas existentes;
+- Este ajuste foi aplicado em todas as automações do `Teddy360`;
+- **PATH**: `tests/shared/utils/check-initial-modals.ts`;
+
 ## [2.1.0] - 2025-MAI-21
 
 ### ADDED
