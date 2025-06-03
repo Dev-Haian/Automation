@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "test": "npx playwright test",
-    "test:gen": "npx playwright codegen",
     "test:ui": "npx playwright test --ui",
+    "test:gen": "npx playwright codegen",
     "test:debug": "npx playwright --debug",
     "test:report": "npx playwright show-report"
   },
-  "keywords": ["QA", "Automation", "Teddy360", "Consig360"],
+  "keywords": ["QA", "Automation", "Teddy360", "Consig360", "Back Office"],
   "author": "Matheus Oliveira <matheus.oliveira@teddydigital.io>",
   "contributors": [
     "Allan Messias <allan.messias@teddydigital.io>",
@@ -20,7 +20,7 @@
     "Vinicius Cucinota <vinicius.cucinota@teddydigital.io>"
   ],
   "license": "ISC",
-  "description": "QA Automation for Consig360 & Teddy360",
+  "description": "QA Automation for Teddy Open Finance applications",
   "dependencies": {
     "dayjs": "^1.11.13"
   },
