@@ -1,6 +1,6 @@
 import test, { expect } from "@playwright/test";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
-import { ONE_SECOND, TRHEE_MINUTES } from "../../../../shared/test-timeout";
+import { ONE_MINUTE, ONE_SECOND, TRHEE_MINUTES } from "../../../../shared/test-timeout";
 import { setup } from "../../../../shared/setup";
 import { Email } from "../../../../shared/utils/send-mail";
 import { Screenshot } from "../../../../shared/utils/screenshot";
@@ -8,7 +8,7 @@ import { getCurrentAutomation } from "../../../../shared/logs/get-current-automa
 import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
 // DONE: Automação finalizada!
-test.setTimeout(TRHEE_MINUTES);
+test.setTimeout(ONE_MINUTE * 1.5);
 const api = {
   gerarNovaProposta: "https://backend-prod.teddy360.com.br/clients/requests",
 };
@@ -75,7 +75,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   });
 
   await test.step(`Validar: preenchimento do formulário de ${sut}`, async () => {
-    await page.waitForTimeout(ONE_SECOND * 12);
+    await page.waitForTimeout(ONE_SECOND * 6);
     // Quantidade de Maquinas Linha Verde
     await page.getByPlaceholder("Informe a quantidade d").pressSequentially(dados.input.quantidadeDeMaquinasLinhaVerde);
     // Marca, Modelo e Versão das Maquinas Linha Verde
@@ -93,7 +93,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     // Previsão de faturamento com as aquisições
     await page.getByPlaceholder("informar qual a previsão de").pressSequentially(dados.input.previsaoDeFaturamento);
     // Relação dos principais clientes do Proponente
-    await page.getByPlaceholder("Descreva o nome dos").pressSequentially(dados.input.relacaoDosPrincipaisClientes);
+    await page.getByPlaceholder("Descreva o nome dos").fill(dados.input.relacaoDosPrincipaisClientes);
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip(`Validar: Geração da proposta de ${sut}`, async () => {
