@@ -7,12 +7,16 @@ import { ONE_SECOND } from "../test-timeout";
  * Caso nenhuma modal seja encontrada, a função apenas segue o fluxo normal da automação.
  */
 export async function checkInitialModals(page: Page) {
-  await page.waitForTimeout(ONE_SECOND * 3.5);
+  await page.waitForTimeout(ONE_SECOND * 7);
 
   // Modal de survey
-  const closeSurveyModal = page.locator("//html/body/ampl-survey/survey/div[2]/i");
+  const closeSurveyModal = page.getByRole("button", { name: "10" });
   if (await closeSurveyModal.isVisible()) {
     await closeSurveyModal.click();
+
+    await page.getByPlaceholder("Eu recomendaria a Teddy").pressSequentially("Isso é uma automação dos QA's");
+    await page.getByRole("button", { name: "Next" }).click();
+    await page.getByRole("button", { name: "Close" }).click();
   }
 
   // Modal de notícias (qualquer notícias)

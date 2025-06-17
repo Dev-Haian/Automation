@@ -26,7 +26,7 @@ export default defineConfig({
         launchOptions: {
           ignoreDefaultArgs: ["--headless", "--headless=old"],
           args: ["--headless=new"],
-          slowMo: 250,
+          slowMo: 300,
         },
         headless: false,
       },

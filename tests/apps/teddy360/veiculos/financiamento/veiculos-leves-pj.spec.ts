@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { TRHEE_MINUTES } from "../../../../shared/test-timeout";
+import { ONE_MINUTE, TRHEE_MINUTES } from "../../../../shared/test-timeout";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
 import { setup } from "../../../../shared/setup";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
 import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
-// FIXME: A jornada de veículos está em refatoração (no back e front)!
-test.setTimeout(TRHEE_MINUTES);
+// DONE: Automação finalizada!
+test.setTimeout(ONE_MINUTE * 1.5);
 const sut = "(Teddy360) Financiamento de Veículos Leves (PJ)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
@@ -19,6 +19,26 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     usuario: {
       email: setup.user.email,
       senha: setup.user.password,
+    },
+    input: {
+      bancoQuePossuiConta: "BraTest",
+      agencia: "9876",
+      contaCorrente: "1234567-8",
+      capitalSocial: "123456789",
+      faturamentoDosUltimos12Meses: "123456789",
+      dataDaAbertura: "12/12/1999",
+      telefoneDeContato: "11912345678",
+      nomeDoSocioAvalista: "John Doe Test",
+      cpfDoSocioAvalista: "02504235887",
+      RgOuCnhDoSocioAvalista: "525252525252",
+      dataDeNascimentoDoSocioAvalista: "10/10/1999",
+      estadoCivilDoSocioAvalista: "Solteiro (a)",
+      nacionalidadeDoSocioAvalista: "Test",
+      cepDoSocio: "4444444",
+      numeroDeResidenciaDoSocio: "256",
+    },
+    botoes: {
+      gerarNovaProposta: "Gerar nova proposta",
     },
   };
 
@@ -122,11 +142,74 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   });
 
   await test.step("Validar: (2° Etapa) preencher os dados extras do cliente", async () => {
-    //
+    // Banco Que Possui Conta
+    await page
+      .getByRole("textbox", { name: "Digite o Nome do banco" })
+      .pressSequentially(dados.input.bancoQuePossuiConta);
+    // Agencia
+    await page.getByRole("textbox", { name: "0000", exact: true }).pressSequentially(dados.input.agencia);
+    // Conta Corrente
+    await page.getByRole("textbox", { name: "0000000-" }).pressSequentially(dados.input.contaCorrente);
+    // Capital Social
+    await page
+      .locator("lib-input-text")
+      .filter({ hasText: "Capital Social R$" })
+      .getByPlaceholder("0,00")
+      .pressSequentially(dados.input.capitalSocial);
+    // Faturamento Dos Ultimos 12 Meses
+    await page
+      .locator("lib-input-text")
+      .filter({ hasText: "Faturamento dos últimos 12" })
+      .getByPlaceholder("0,00")
+      .pressSequentially(dados.input.faturamentoDosUltimos12Meses);
+    // Data Da Abertura
+    await page
+      .locator("lib-input-text")
+      .filter({ hasText: "Data de abertura" })
+      .getByPlaceholder("/00/0000")
+      .pressSequentially(dados.input.dataDaAbertura);
+    // Telefone De Contato
+    await page.getByRole("textbox", { name: "(00) 00000-" }).pressSequentially(dados.input.telefoneDeContato);
+    // Nome Do Socio Avalista
+    await page
+      .getByRole("textbox", { name: "Digite o nome completo" })
+      .pressSequentially(dados.input.nomeDoSocioAvalista);
+    // CPF Do Socio Avalista
+    await page.getByRole("textbox", { name: "000.000.000-" }).pressSequentially(dados.input.cpfDoSocioAvalista);
+    // RG ou CNH do Sócio Avalista
+    await page
+      .getByRole("textbox", { name: "Digite o RG ou CNH do sócio" })
+      .pressSequentially(dados.input.RgOuCnhDoSocioAvalista);
+    // Data De Nascimento Do Socio Avalista
+    await page
+      .locator("lib-input-text")
+      .filter({ hasText: "Data de nascimento do sócio" })
+      .getByPlaceholder("/00/0000")
+      .pressSequentially(dados.input.dataDeNascimentoDoSocioAvalista);
+    // Estado Civil Do Socio Avalista
+    await page.locator(".after-component > lib-icon > .icon").first().click();
+    await page.getByText(dados.input.estadoCivilDoSocioAvalista).first().click();
+    // Nacionalidade Do Socio Avalista
+    await page
+      .getByRole("textbox", { name: "Digite a Nacionalidade do Só" })
+      .pressSequentially(dados.input.nacionalidadeDoSocioAvalista);
+    // CEP Do Socio
+    await page
+      .locator(
+        "//html/body/app-root/app-layout/section/div[2]/div/div/new-proposal/div/div/app-vehicle-financing/div[3]/div/form/div[5]/span[2]/lib-input-text/div/lib-input/div/div/input"
+      )
+      .pressSequentially(dados.input.cepDoSocio);
+
+    await page.getByPlaceholder("Digite a Cidade").first().pressSequentially("Testando");
+    // Número de Residência do Sócio
+    await page
+      .getByRole("textbox", { name: "000", exact: true })
+      .first()
+      .pressSequentially(dados.input.numeroDeResidenciaDoSocio);
+    await page.waitForTimeout(1000 * 5);
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip("Validar: (3° Etapa) finalizar a jornada e gerar proposta", async () => {
-    await page.waitForTimeout(1000 * 5);
-    await page.getByRole("button", { name: "Finalizar" }).click();
+    await page.getByRole("button", { name: dados.botoes.gerarNovaProposta }).click();
   });
 });
