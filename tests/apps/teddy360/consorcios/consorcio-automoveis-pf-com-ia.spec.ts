@@ -77,9 +77,9 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
 
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
   await test.skip(`Validar: Enviar proposta de ${sut}`, async () => {
-    const button = page.getByRole("button", { name: dados.botoes.enviarProposta });
-    await button.click();
-    await button.waitFor({ timeout: ONE_SECOND * 5 });
+    const botao = page.getByRole("button", { name: dados.botoes.enviarProposta });
+    await botao.click();
+    await botao.waitFor({ timeout: ONE_SECOND * 5 });
 
     await new Email().send({
       page,

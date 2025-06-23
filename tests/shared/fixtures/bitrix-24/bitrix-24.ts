@@ -16,9 +16,9 @@ class Bitrix24 {
       await page.locator('input[name="USER_LOGIN"]').fill(email);
       await page.locator('input[name="USER_PASSWORD"]').fill(password);
 
-      const button = page.getByRole("button", { name: "Login" });
-      button.click();
-      button.waitFor({ timeout: ONE_SECOND * 5 });
+      const botao = page.getByRole("button", { name: "Login" });
+      botao.click();
+      botao.waitFor({ timeout: ONE_SECOND * 5 });
     });
   }
 
