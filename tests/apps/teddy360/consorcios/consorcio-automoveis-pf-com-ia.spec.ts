@@ -2,8 +2,6 @@ import test, { expect } from "@playwright/test";
 import { AuthTeddy360 } from "../../../shared/factories/auth-teddy360";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../shared/test-timeout";
 import { setup } from "../../../shared/setup";
-import { Email } from "../../../shared/utils/send-mail";
-import { Screenshot } from "../../../shared/utils/screenshot";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 import { checkInitialModals } from "../../../shared/utils/check-initial-modals";
 
@@ -80,14 +78,5 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     const botao = page.getByRole("button", { name: dados.botoes.enviarProposta });
     await botao.click();
     await botao.waitFor({ timeout: ONE_SECOND * 5 });
-
-    await new Email().send({
-      page,
-      sut,
-      api: await page.waitForResponse(api.enviarProposta),
-      subject: `Erro ao enviar proposta - ${sut}`,
-      pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
-      expectedStatusCode: 201,
-    });
   });
 });

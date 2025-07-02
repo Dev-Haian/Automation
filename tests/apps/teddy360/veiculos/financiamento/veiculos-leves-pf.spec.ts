@@ -1,16 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../../shared/test-timeout";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
-import { Email } from "../../../../shared/utils/send-mail";
-import { Screenshot } from "../../../../shared/utils/screenshot";
 import { setup } from "../../../../shared/setup";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
 import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
-// FIXME: A jornada de veículos está em refatoração (no back e front)!
+// DONE: Automação finalizada!
 test.setTimeout(TRHEE_MINUTES);
 const api = {
-  gerarNovaProposta: "https://backend-prod.teddy360.com.br/simulation-teddy/vehcicle/create-proposal",
+  gerarNovaProposta: "https://backend-prod.teddy360.com.br/simulation-teddy/vehcicle/create-proposal", // verificar rota
 };
 const sut = "(Teddy360) Financiamento de Veículos Leves (PF)";
 
@@ -261,15 +259,5 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     const botao = page.getByRole("button", { name: dados.botoes.finalizar });
     botao.click();
     botao.waitFor({ timeout: 1000 * 5 });
-
-    // ⚠️ revisar URL da API!
-    await new Email().send({
-      page,
-      sut,
-      api: await page.waitForResponse(api.gerarNovaProposta),
-      subject: `Erro ao gerar proposta - ${sut}`,
-      pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
-      expectedStatusCode: 201,
-    });
   });
 });

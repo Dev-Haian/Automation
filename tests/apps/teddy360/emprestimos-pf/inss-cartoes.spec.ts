@@ -102,27 +102,9 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     const botao = page.getByRole("button", { name: dados.botoes.gerarNovaProposta });
     botao.click();
     botao.waitFor({ timeout: 1000 * 5 });
-    // disparo de e-email
-    await new Email().send({
-      page,
-      sut,
-      api: await page.waitForResponse(api.gerarNovaProposta),
-      subject: `Erro detectado no fluxo: ${sut} - Não foi possível gerar proposta`,
-      pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
-      errorVisibleMessage: "Campo obrigatório",
-      expectedStatusCode: 201,
-    });
 
     const { status } = await page.waitForResponse(api.gerarNovaProposta);
     // Validar que o status code retornado da API ao clicar em gerar proposta é igual a 201
     expect(status()).toEqual(201);
   });
-
-  // BancoDeDados("Validar: dados da proposta no Banco de Dados", async ({ db }) => {
-  //   await db.executeQuery(/* SQL */ `SELECT name FROM propostas WHERE name = ${dados.input.agencia}`);
-  // });
-
-  // CRM("Validar: proposta criada no Bitrix24", async ({ bitrix24 }) => {
-  //   await bitrix24.findProposalById("123456");
-  // });
 });

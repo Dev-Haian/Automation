@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { ONE_MINUTE, TRHEE_MINUTES } from "../../../../shared/test-timeout";
+import { ONE_MINUTE } from "../../../../shared/test-timeout";
 import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
 import { setup } from "../../../../shared/setup";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";

@@ -11,11 +11,11 @@ import { outlook } from "./setup";
  * ```
  */
 export const recipients: Array<string> = [
-  outlook.email,
+  outlook.email, // NÃO REMOVER ESTA LINHA
   // "allan.messias@teddydigital.io",
   // "beatriz.amaya@teddydigital.io",
+  // "eduardo.dorneles@teddydigital.io",
   // "haian.santos@teddydigital.io",
-  // "felipe.goncalves@bpotech.com.br",
   // "flavio.vieira@teddydigital.io",
   // "gustavo.barros@teddydigital.io",
   // "joao.cruz@teddydigital.io",

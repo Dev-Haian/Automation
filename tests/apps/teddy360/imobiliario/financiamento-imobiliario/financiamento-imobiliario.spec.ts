@@ -5,7 +5,7 @@ import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
 import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
 
-// DONE: Automação finalizada! (Beatriz)
+// FIXME: Ajustar automação, Vini
 test.setTimeout(FIVE_MINUTES);
 const sut = "(Teddy360) Financiamento de imobiliário (PF)";
 

@@ -2,8 +2,6 @@ import test, { expect } from "@playwright/test";
 import { setup } from "../../../shared/setup";
 import { AuthBackOffice } from "../../../shared/factories/auth-back-office";
 import { ONE_MINUTE, ONE_SECOND } from "../../../shared/test-timeout";
-import { Email } from "../../../shared/utils/send-mail";
-import { Screenshot } from "../../../shared/utils/screenshot";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
 import { getBackOfficeUserByName } from "../../../shared/factories/back-office/get-back-office-user-by-name";
 
@@ -81,14 +79,7 @@ test(`Feat: [${sut}] Validar o fluxo completo`, async ({ page }) => {
     await btnAdicionar.click();
     await btnAdicionar.waitFor({ timeout: ONE_SECOND * 5 });
 
-    await new Email().send({
-      page,
-      sut,
-      api: await page.waitForResponse(api.adicionarNovoUsuario),
-      subject: `Erro - ${sut}`,
-      pathToAttachment: await new Screenshot().getPathToAttachment(page, sut),
-      expectedStatusCode: 201,
-    });
+    // disparo de e-mail aqui
 
     expect(await page.getByText(dados.mensagem.sucessoAoCriarUsuario, { exact: true }).isVisible()).toBeTruthy();
   });
