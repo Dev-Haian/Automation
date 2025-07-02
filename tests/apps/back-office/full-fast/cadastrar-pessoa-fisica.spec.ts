@@ -178,7 +178,6 @@ test(`Feat: [${sut}] validar fluxo completo`, async ({ page }) => {
   });
 
   await test.step("Validar: Deletar pessoa física criada", async () => {
-    // await page.getByRole("link", { name: dados.tabs.pessoaFisica }).click();
     await page.locator("tr").filter({ hasText: dados.input.nome }).locator("button").nth(1).click();
     await page.getByRole("button", { name: dados.botoes.deletar }).click();
 

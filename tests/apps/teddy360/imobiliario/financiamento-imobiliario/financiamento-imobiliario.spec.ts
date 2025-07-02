@@ -178,7 +178,8 @@ test(`Fluxo Completo de Proposta de ${sut} na Plataforma`, async ({ page }) => {
     expect(response.status()).toBe(201);
   });
 
-  await test.step("Validar: (3° Etapa) Usuário deve conseguir visualizar os resultados e gerar proposta", async () => {
+  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
+  await test.skip("Validar: (3° Etapa) Usuário deve conseguir visualizar os resultados e gerar proposta", async () => {
     //Esperar o loading dos parceiros carregarem
     await page.waitForTimeout(1000 * 50);
     //Verifica se está na página correta

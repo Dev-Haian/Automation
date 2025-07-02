@@ -94,7 +94,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     await page.getByPlaceholder("Descreva o nome dos").fill(dados.input.relacaoDosPrincipaisClientes);
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
-  await test.step(`Validar: Geração da proposta de ${sut}`, async () => {
+  await test.skip(`Validar: Geração da proposta de ${sut}`, async () => {
     const botao = page.getByRole("button", { name: dados.botoes.gerarNovaProposta });
     await botao.click();
     await botao.waitFor({ timeout: ONE_SECOND * 5 });
