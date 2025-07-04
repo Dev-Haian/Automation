@@ -6,7 +6,7 @@ export function formatMailBody(body: ErrorContentBodyProps): string {
 
 		Ocorreu um erro na jornada de [${body.sut}]. Segue o erro:
 
-		Endpoint: ${JSON.stringify(body.responseURL)}
+		Endpoint: ${JSON.stringify(body.endpoint)}
 		Método Http: ${body.httpMethod}
 		Status: ${JSON.stringify(body.statusCode)}
 		JSON: ${JSON.stringify(body.jsonBody)}

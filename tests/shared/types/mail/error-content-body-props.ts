@@ -1,6 +1,6 @@
 export type ErrorContentBodyProps = {
   statusCode: number;
-  responseURL: string;
+  endpoint: string;
   httpMethod: string;
   sut: string;
   jsonBody: any;
