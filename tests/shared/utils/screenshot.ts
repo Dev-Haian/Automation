@@ -24,7 +24,7 @@ class Screenshot {
    * e obter o caminho para o usuário.
    */
   public async getPathToAttachment(page: Page, sut: string) {
-    const date = dayjs().format("YYYY-MMMM-DD HH-mm").toString();
+    const date = dayjs().format("YYYY-MMMM-DD HH-mm-ss").toString();
 
     const attachmentName = `${sut}-(${date}).png`;
 
