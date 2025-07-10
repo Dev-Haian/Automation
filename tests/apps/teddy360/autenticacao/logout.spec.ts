@@ -39,7 +39,7 @@ test(`Feat: [${sut}] Validação fluxo de encerramento de sessão`, async ({ pag
     await page.getByText("Bem-vindo").waitFor();
 
     await page.getByRole("button", { name: "連 鍊" }).click();
-    await page.locator("div").filter({ hasText: "Sair" }).nth(2).click();
+    await page.getByText("Sair").click();
     await page.waitForURL(`${dados.plataforma.url}/#/login`);
 
     expect(page.url()).toEqual(`${dados.plataforma.url}/#/login`);

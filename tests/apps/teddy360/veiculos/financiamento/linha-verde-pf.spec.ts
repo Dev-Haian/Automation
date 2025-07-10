@@ -59,6 +59,8 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   });
 
   await test.step("Validar: selecionar um cliente PF e clicar em nova proposta", async () => {
+    await page.locator("lib-tab-item").filter({ hasText: "Pessoa Física" }).first().click();
+
     const ultimoCliente = -1;
     const iconeDeNovaProposta = "ﮒ ﮓ ﮔ ﮕ";
 
@@ -94,7 +96,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     await page.getByPlaceholder("Descreva o nome dos").fill(dados.input.relacaoDosPrincipaisClientes);
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
-  await test.skip(`Validar: Geração da proposta de ${sut}`, async () => {
+  await test.step(`Validar: Geração da proposta de ${sut}`, async () => {
     const botao = page.getByRole("button", { name: dados.botoes.gerarNovaProposta });
     await botao.click();
     await botao.waitFor({ timeout: ONE_SECOND * 5 });
