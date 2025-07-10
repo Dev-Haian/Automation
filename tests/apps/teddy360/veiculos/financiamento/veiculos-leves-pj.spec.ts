@@ -64,9 +64,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
 
   await test.step("Validar: selecionar um cliente PJ e clicar em nova proposta", async () => {
     // Clicando na tab "Pessoa Jurídica"
-    await page
-      .locator("div > lib-tab-item:nth-child(2) > button > lib-button > button", { hasText: /Pessoa Jurídica/ })
-      .click();
+    await page.locator("lib-tab-item").filter({ hasText: "Pessoa Jurídica" }).first().click();
 
     const ultimoCliente = -1;
     const iconeDeNovaProposta = "ﮒ ﮓ ﮔ ﮕ";
@@ -209,7 +207,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     await page.waitForTimeout(1000 * 5);
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
-  await test.skip("Validar: (3° Etapa) finalizar a jornada e gerar proposta", async () => {
+  await test.step("Validar: (3° Etapa) finalizar a jornada e gerar proposta", async () => {
     await page.getByRole("button", { name: dados.botoes.gerarNovaProposta }).click();
   });
 });

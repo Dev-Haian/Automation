@@ -78,6 +78,8 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   });
 
   await test.step("Validar: selecionar um cliente PF e clicar em nova proposta", async () => {
+    await page.locator("lib-tab-item").filter({ hasText: "Pessoa Física" }).first().click();
+
     const ultimoCliente = -1;
     const iconeDeNovaProposta = "ﮒ ﮓ ﮔ ﮕ";
 
@@ -252,7 +254,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
     await page.getByRole("button", { name: dados.botoes.continuar }).click();
   });
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
-  await test.skip("Validar: (5° Etapa) finalizar a jornada e gerar proposta", async () => {
+  await test.step("Validar: (5° Etapa) finalizar a jornada e gerar proposta", async () => {
     // Checkbox 'Ao prosseguir, você confirma que leu todos os detalhes...'
     await page.locator(".accept-terms > lib-checkbox > .input-checkbox > .checkmark").click();
     await page.waitForTimeout(ONE_SECOND * 1.2);
