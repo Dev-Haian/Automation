@@ -7,7 +7,7 @@ import { ONE_SECOND } from "../test-timeout";
  * Caso nenhuma modal seja encontrada, a função apenas segue o fluxo normal da automação.
  */
 export async function checkInitialModals(page: Page) {
-  await page.waitForTimeout(ONE_SECOND * 7);
+  await page.waitForTimeout(ONE_SECOND * 10);
 
   // Modal de survey
   const closeSurveyModal = page.getByRole("button", { name: "10" });
