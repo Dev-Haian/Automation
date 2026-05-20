@@ -1,9 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { ONE_MINUTE } from "../../../../shared/test-timeout";
-import { AuthTeddy360 } from "../../../../shared/factories/auth-teddy360";
-import { setup } from "../../../../shared/setup";
 import { getCurrentAutomation } from "../../../../shared/logs/get-current-automation";
-import { checkInitialModals } from "../../../../shared/utils/check-initial-modals";
+import {
+  createBaseDados,
+  dismissInitialModals,
+  loginAsQaUser,
+  openClientsModule,
+  selectLastClientNewProposal,
+} from "../../../../shared/helpers";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE * 1.5);
@@ -13,13 +17,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   getCurrentAutomation(sut);
 
   const dados = {
-    plataforma: {
-      url: setup.apps.teddy360.url,
-    },
-    usuario: {
-      email: setup.user.email,
-      senha: setup.user.password,
-    },
+    ...createBaseDados("teddy360"),
     input: {
       bancoQuePossuiConta: "BraTest",
       agencia: "9876",
@@ -43,33 +41,19 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   };
 
   await test.step("Validar: Realizar login", async () => {
-    await new AuthTeddy360().makeUserLogin({
-      page,
-      url: dados.plataforma.url,
-      userEmail: dados.usuario.email,
-      userPassword: dados.usuario.senha,
-    });
+    await loginAsQaUser(page, dados);
   });
 
   await test.step("Validar: Checar modais iniciais", async () => {
-    await checkInitialModals(page);
+    await dismissInitialModals(page);
   });
 
   await test.step("Validar: acessar módulo Clientes", async () => {
-    await page.locator("#itens-menu").getByText("Clientes").click();
-    await page.waitForURL(`${dados.plataforma.url}/#/client-list`);
-
-    expect(page.url()).toEqual(`${dados.plataforma.url}/#/client-list`);
+    await openClientsModule(page, dados.plataforma.url);
   });
 
   await test.step("Validar: selecionar um cliente PJ e clicar em nova proposta", async () => {
-    // Clicando na tab "Pessoa Jurídica"
-    await page.locator("lib-tab-item").filter({ hasText: "Pessoa Jurídica" }).first().click();
-
-    const ultimoCliente = -1;
-    const iconeDeNovaProposta = "ﮒ ﮓ ﮔ ﮕ";
-
-    await page.getByRole("button", { name: iconeDeNovaProposta }).nth(ultimoCliente).click();
+    await selectLastClientNewProposal(page, { personType: "PJ" });
   });
 
   await test.step(`Validar: acessar e iniciar jornada de ${sut}`, async () => {

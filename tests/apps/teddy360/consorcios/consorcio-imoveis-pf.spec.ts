@@ -1,62 +1,47 @@
-import test, { expect } from "@playwright/test";
-import { AuthTeddy360 } from "../../../shared/factories/auth-teddy360";
+import test from "@playwright/test";
 import { ONE_SECOND, TRHEE_MINUTES } from "../../../shared/test-timeout";
-import { setup } from "../../../shared/setup";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
-import { checkInitialModals } from "../../../shared/utils/check-initial-modals";
+import {
+  COMMON_BUTTONS,
+  createBaseDados,
+  dismissInitialModals,
+  loginAsQaUser,
+  openClientsModule,
+  selectLastClientNewProposal,
+} from "../../../shared/helpers";
 
 // TODO: Automação a fazer!
 test.setTimeout(TRHEE_MINUTES);
-const api = {
-  enviarProposta: "https://backend-consorcio-prod.teddy360.com.br/proposals/send-proposal",
-};
 const sut = "(Teddy360) Consórcio - Imóveis (PF)";
 
 test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na plataforma`, async ({ page }) => {
   getCurrentAutomation(sut);
 
   const dados = {
-    plataforma: {
-      url: setup.apps.conkey.url,
-    },
-    usuario: {
-      email: setup.user.email,
-      senha: setup.user.password,
-    },
+    ...createBaseDados("conkey"),
     input: {
       campo: "valor de input do campo",
     },
     botoes: {
-      continuar: "Continuar",
+      continuar: COMMON_BUTTONS.continuar,
       enviarProposta: "Enviar nova proposta",
     },
   };
 
   await test.step("Validar: Realizar login", async () => {
-    await new AuthTeddy360().makeUserLogin({
-      page,
-      url: dados.plataforma.url,
-      userEmail: dados.usuario.email,
-      userPassword: dados.usuario.senha,
-    });
+    await loginAsQaUser(page, dados);
   });
 
   await test.step("Validar: Checar modais iniciais", async () => {
-    await checkInitialModals(page);
+    await dismissInitialModals(page);
   });
 
   await test.step("Validar: acessar módulo Clientes", async () => {
-    await page.locator("#itens-menu").getByText("Clientes").click();
-    await page.waitForURL(`${dados.plataforma.url}/#/client-list`);
-
-    expect(page.url()).toEqual(`${dados.plataforma.url}/#/client-list`);
+    await openClientsModule(page, dados.plataforma.url);
   });
 
   await test.step("Validar: selecionar um cliente PF e clicar em nova proposta", async () => {
-    const ultimoCliente = -1;
-    const iconeDeNovaProposta = "ﮒ ﮓ ﮔ ﮕ";
-
-    await page.getByRole("button", { name: iconeDeNovaProposta }).nth(ultimoCliente).click();
+    await selectLastClientNewProposal(page);
   });
 
   await test.step(`Validar: acessar e iniciar jornada de ${sut}`, async () => {
@@ -72,7 +57,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   await test.step(`Validar: preenchimento do formulário de ${sut}`, async () => {
     // Automatizar o preenchimento dos forms
   });
-  // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
+
   await test.skip(`Validar: Enviar proposta de ${sut}`, async () => {
     const botao = page.getByRole("button", { name: dados.botoes.enviarProposta });
     await botao.click();

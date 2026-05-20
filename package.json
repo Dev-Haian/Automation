@@ -6,8 +6,12 @@
   "scripts": {
     "test": "npx playwright test",
     "test:ui": "npx playwright test --ui",
+    "test:consorcios": "npx playwright test tests/apps/teddy360/consorcios",
+    "test:veiculos": "npx playwright test tests/apps/teddy360/veiculos",
+    "test:auth": "npx playwright test tests/apps/teddy360/autenticacao",
+    "test:clientes": "npx playwright test tests/apps/teddy360/clientes",
     "test:gen": "npx playwright codegen",
-    "test:debug": "npx playwright --debug",
+    "test:debug": "npx playwright test --debug",
     "test:report": "npx playwright show-report"
   },
   "keywords": ["QA", "Automation", "Teddy360", "Consig360", "Back Office"],

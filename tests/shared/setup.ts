@@ -1,5 +1,5 @@
-const automationEmail = "haian.santos+gm@teddydigital.io";
-const automationPassword = "Ha1907!!";
+const automationEmail = process.env.QA_EMAIL ?? "haian.santos+gm@teddydigital.io";
+const automationPassword = process.env.QA_PASSWORD ?? "Ha1907!!";
 
 /**
  * Este é um objeto com as credenciais de acesso do QA nas automações.

@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { AuthTeddy360 } from "../../../shared/factories/auth-teddy360";
 import { ONE_MINUTE } from "../../../shared/test-timeout";
-import { setup } from "../../../shared/setup";
 import { getCurrentAutomation } from "../../../shared/logs/get-current-automation";
-import { checkInitialModals } from "../../../shared/utils/check-initial-modals";
+import { createBaseDados, dismissInitialModals, loginAsQaUser } from "../../../shared/helpers";
 
 // DONE: Automação finalizada!
 test.setTimeout(ONE_MINUTE);
@@ -12,26 +10,14 @@ const sut = "(Teddy360) Logout";
 test(`Feat: [${sut}] Validação fluxo de encerramento de sessão`, async ({ page }) => {
   getCurrentAutomation(sut);
 
-  const dados = {
-    plataforma: {
-      url: setup.apps.teddy360.url,
-    },
-    usuario: {
-      email: setup.user.email,
-      senha: setup.user.password,
-    },
-  };
+  const dados = createBaseDados("teddy360");
+
   await test.step("Validar: Usuário deve estar previamente autenticado", async () => {
-    await new AuthTeddy360().makeUserLogin({
-      page,
-      url: dados.plataforma.url,
-      userEmail: dados.usuario.email,
-      userPassword: dados.usuario.senha,
-    });
+    await loginAsQaUser(page, dados);
   });
 
   await test.step("Validar: Checar modais iniciais", async () => {
-    await checkInitialModals(page);
+    await dismissInitialModals(page);
   });
 
   await test.step("Validar: Usuário deve conseguir encerrar sessão", async () => {

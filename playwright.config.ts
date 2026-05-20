@@ -1,12 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const isCI = !!process.env.CI;
+const isHeadless = process.env.PW_HEADLESS === "true";
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
-  forbidOnly: !!process.env.CI,
-  // retries: process.env.CI ? 2 : 0,
+  forbidOnly: isCI,
   retries: 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 1 : undefined,
   reporter: "html",
   use: {
     video: "on",
@@ -24,12 +26,11 @@ export default defineConfig({
           width: 1920,
           height: 1080,
         },
+        headless: isHeadless,
         launchOptions: {
-          ignoreDefaultArgs: ["--headless", "--headless=old"],
-          args: ["--headless=new"],
-          slowMo: 300,
+          slowMo: isCI ? 0 : 300,
+          ...(isHeadless ? { args: ["--headless=new"] } : {}),
         },
-        headless: false,
       },
     },
   ],
