@@ -17,7 +17,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
 
   const dados = {
     plataforma: {
-      url: setup.apps.teddy360.url,
+      url: setup.apps.conkey.url,
     },
     usuario: {
       email: setup.user.email,
@@ -70,7 +70,32 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
   });
 
   await test.step(`Validar: preenchimento do formulário de ${sut}`, async () => {
-    // Automatizar o preenchimento dos forms
+    const container = page.locator('lib-input-text[formcontrolname="propertyValue"]');
+
+    const inputValorBem = container.locator('input[placeholder="Text Input"]');
+    await inputValorBem.waitFor({ state: "visible" });
+
+    await inputValorBem.click();
+    await inputValorBem.fill("50.000,00");
+
+    const inputRenda = page.locator('lib-input-text[formcontrolname="provenIncome"] input[placeholder="Text Input"]');
+
+    await inputRenda.waitFor({ state: "visible" });
+    await inputRenda.click();
+    await inputRenda.type("8000,00");
+
+    const inputParcela = page.locator(
+      'lib-input-text[formcontrolname="maxInstallmentValue"] input[placeholder="Text Input"]'
+    );
+
+    await inputParcela.waitFor({ state: "visible" });
+    await inputParcela.click();
+    await inputParcela.type("1500,00");
+
+    const botaoPesquisar = page.locator("lib-button >> text=Pesquisar");
+    await botaoPesquisar.waitFor({ state: "visible" });
+    await botaoPesquisar.click({ force: true });
+    await botaoPesquisar.waitFor({ timeout: ONE_SECOND * 5 });
   });
 
   // INFO: para avançar e finalizar a automação, mude 'skip' para 'step'. Após isso, remove esse comentário
