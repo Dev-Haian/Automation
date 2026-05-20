@@ -17,7 +17,7 @@ test(`Feat: [${sut}] Validar fluxo completo de geração de propostas na platafo
 
   const dados = {
     plataforma: {
-      url: setup.apps.teddy360.url,
+      url: setup.apps.conkey.url,
     },
     usuario: {
       email: setup.user.email,

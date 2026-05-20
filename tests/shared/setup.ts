@@ -1,5 +1,5 @@
-const automationEmail = "alerta_qualidade@teddydigital.io";
-const automationPassword = "Qa25@T&ddy";
+const automationEmail = "haian.santos+gm@teddydigital.io";
+const automationPassword = "Ha1907!!";
 
 /**
  * Este é um objeto com as credenciais de acesso do QA nas automações.
@@ -29,6 +29,9 @@ const setup = {
     },
     teddy360: {
       url: "https://app.teddy360.com.br",
+    },
+    conkey: {
+      url: "https://app.conkey.com.br",
     },
     virtualStore: {
       url: "https://virtual-store.teddybackoffice.com.br",
